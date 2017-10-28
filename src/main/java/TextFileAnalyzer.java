@@ -14,7 +14,7 @@ public class TextFileAnalyzer extends JDialog {
     private JEditorPane editorPane1;
 
 
-    public TextFileAnalyzer() {
+    TextFileAnalyzer() {
         setContentPane(contentPane);
         setModal(true);
         //getRootPane().setDefaultButton(buttonOK);
@@ -48,9 +48,7 @@ public class TextFileAnalyzer extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         DefaultMutableTreeNode top = new DefaultMutableTreeNode(".");
-        create
 
-        tree1 = new JTree()
     }
 
     private void onOK() {
