@@ -14,7 +14,7 @@ public class TextFileAnalyzer extends JDialog {
     private JEditorPane editorPane1;
 
 
-    TextFileAnalyzer() {
+    public TextFileAnalyzer() {
         setContentPane(contentPane);
         setModal(true);
         //getRootPane().setDefaultButton(buttonOK);

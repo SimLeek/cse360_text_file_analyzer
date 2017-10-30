@@ -10,7 +10,7 @@ public class CreateChildren implements Runnable{
 
     private File fileRoot;
 
-    CreateChildren(File fileRoot, DefaultMutableTreeNode root){
+    public CreateChildren(File fileRoot, DefaultMutableTreeNode root){
         this.fileRoot = fileRoot;
         this.root = root;
     }

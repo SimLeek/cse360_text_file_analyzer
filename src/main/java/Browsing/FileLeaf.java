@@ -7,7 +7,7 @@ public class FileLeaf {
 
     private File file;
 
-    FileLeaf(File file){
+    public FileLeaf(File file){
         this.file=file;
     }
 
