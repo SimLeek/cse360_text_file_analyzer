@@ -1,8 +1,10 @@
-import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import java.awt.event.*;
+import Browsing.FileTree;
 
-public class TextFileAnalyzer extends JDialog {
+import javax.swing.*;
+import java.awt.event.*;
+import java.io.File;
+
+public class TextFileAnalyzer extends JDialog{
     private JPanel contentPane;
     private JButton newButton;
     private JButton browseButton;
@@ -10,27 +12,13 @@ public class TextFileAnalyzer extends JDialog {
     private JButton analyzeButton;
     private JButton helpButton;
     private JButton averageButton;
-    private JTree tree1;
+    private FileTree tree1;
     private JEditorPane editorPane1;
 
 
-    public TextFileAnalyzer() {
+    TextFileAnalyzer() {
         setContentPane(contentPane);
         setModal(true);
-        //getRootPane().setDefaultButton(buttonOK);
-
-        /*buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
-
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-        */
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -46,8 +34,6 @@ public class TextFileAnalyzer extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode(".");
 
     }
 
@@ -67,4 +53,12 @@ public class TextFileAnalyzer extends JDialog {
         dialog.setVisible(true);
         System.exit(0);
     }
+
+    private void createUIComponents() {
+        File fileRoot = new File(".");
+        this.tree1 = new FileTree(fileRoot);
+        this.tree1.updateUI();
+
+    }
+
 }
