@@ -1,4 +1,3 @@
-import Browsing.FileTree;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -13,7 +12,6 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
     private JButton analyzeButton;
     private JButton helpButton;
     private JButton averageButton;
-    private FileTree tree1;
     private JEditorPane editorPane1;
     private String filename;
 
@@ -81,11 +79,6 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
         dispose();
     }
 
-    private void createUIComponents() {
-        File fileRoot = new File(".");
-        this.tree1 = new FileTree(fileRoot);
-        this.tree1.updateUI();
 
-    }
 
 }
