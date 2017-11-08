@@ -15,7 +15,6 @@ public class TextFileAnalyzer extends JDialog{
     private FileTree tree1;
     private JEditorPane editorPane1;
 
-
     TextFileAnalyzer() {
         setContentPane(contentPane);
         setModal(true);
@@ -45,13 +44,6 @@ public class TextFileAnalyzer extends JDialog{
     private void onCancel() {
         // add your code here if necessary
         dispose();
-    }
-
-    public static void main(String[] args) {
-        TextFileAnalyzer dialog = new TextFileAnalyzer();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
     }
 
     private void createUIComponents() {
