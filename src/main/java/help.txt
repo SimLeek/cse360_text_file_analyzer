@@ -1,0 +1,29 @@
+Hello and welcome to our Text File Analyzer!
+Below is a list of helpful tips and information in order to get you started using the program:
+
+
+The New button creates a new file.
+
+The Browse button allows you to browse your computer to select a file.
+
+The Edit button allows you to change a file's text.
+
+The Analyze button displays various statistics for a selected file in the following order: 
+	# of lines
+	# of blank lines
+	# of spaces
+	# of words
+	Average chars per line
+	Average word length
+	Most common words
+
+The Help button opens this page!
+
+The Average button takes all files into account and calculates the same statistics as the Analyze button in the following order:
+	# of lines
+	# of blank lines
+	# of spaces
+	# of words
+	Average chars per line
+	Average word length
+	Most common words
