@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +11,10 @@ public class Analysis {
     private int numOfSpaces = 0; //c
     private int numOfWords = 0; //d
     private int numTotalChar = 0; //e1, f1
+    List<String> contentList;
+    private String mostCommonWord = ""; //g
 
-    Analysis(String fileName){
+    Analysis(File fileName){
         //myFile = new File(fileName);
         //System.out.println("File name to be analyzed: " + myFile.toString()); //testing for correct filename
 
@@ -24,7 +23,7 @@ public class Analysis {
             BufferedReader buff = new BufferedReader(reader);
 
             String line;
-            List<String> contentList = new ArrayList<String>();
+            contentList = new ArrayList<String>();
 
             while ((line = buff.readLine()) != null) {
 
@@ -52,7 +51,7 @@ public class Analysis {
 
                 //d. # Words:
                 String trim = line.trim();
-                numOfWords = trim.isEmpty() ? 0 : trim.split("\\s+").length;
+                numOfWords += trim.isEmpty() ? 0 : trim.split("\\s+").length;
 
             }
 
@@ -67,46 +66,51 @@ public class Analysis {
         }
     }
 
-    public int numLines(){ //returns number of lines in the text file
-        System.out.println("Number of lines: " + numOfLines);
+    public int NumLines(){
         return numOfLines;
     }
 
-    public int numBlankLines() {
-        System.out.println("Number of blank lines: " + numOfBlankLines);
+    public int NumBlankLines() {
         return numOfBlankLines;
     }
 
-    public int numSpaces(){
-        System.out.println("Number of spaces: " + numOfSpaces);
+    public int NumSpaces(){
         return numOfSpaces;
     }
 
-    public int numWords() {
-        System.out.println("Number of words: " + numOfWords);
+    public int NumWords() {
         return numOfWords;
     }
 
-    public int avgCharPerLine(){
-        int avgChar = (int) floor(numTotalChar / numOfLines);
-        System.out.println("Average number of characters per line: " + avgChar);
+    public int AvgCharPerLine(){
+        int avgChar = 0;
+        if (numOfLines != 0){
+            avgChar = (int) floor(numTotalChar / numOfLines);
+        }
         return avgChar;
     }
 
-    public int avgWordLength(){
-        int avgWord;
-        if (numOfWords == 0){
-            avgWord = 0;
-        }
-        else {
+    public int AvgWordLength(){
+        int avgWord = 0;
+        if (numOfWords != 0){
             avgWord = (numTotalChar - numOfSpaces) / numOfWords;
         }
 
         return avgWord;
     }
 
-    public String mostCommonWords() {
-        return " ";
+    public String MostCommonWords() {
+        mostCommonWord = contentList.get(0);
+        int longestWordLength = 0;
+        for (int i = 0; i < contentList.size() - 1; i++){
+            if(contentList.get(i).length() > contentList.get(i+1).length()){
+                longestWordLength = contentList.get(i).length();
+            }
+            else {
+                longestWordLength = contentList.get(i+1).length();
+            }
+        }
+        return mostCommonWord;
     }
 
 }
