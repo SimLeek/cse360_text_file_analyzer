@@ -34,12 +34,12 @@
                   <text value="New"/>
                 </properties>
               </component>
-              <component id="6a498" class="javax.swing.JButton" binding="browseButton" default-binding="true">
+              <component id="6a498" class="javax.swing.JButton" binding="openButton" default-binding="true">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Browse"/>
+                  <text value="Open"/>
                 </properties>
               </component>
               <component id="4a60" class="javax.swing.JButton" binding="editButton" default-binding="true">

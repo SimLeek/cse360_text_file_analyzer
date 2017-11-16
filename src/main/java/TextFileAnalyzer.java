@@ -1,6 +1,5 @@
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +7,7 @@ import java.io.IOException;
 public class TextFileAnalyzer extends JDialog implements ActionListener {
     private JPanel contentPane;
     private JButton newButton;
-    private JButton browseButton;
+    private JButton openButton;
     private JButton editButton;
     private JButton analyzeButton;
     private JButton helpButton;
@@ -19,7 +18,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
 
 
     TextFileAnalyzer() {
-        browseButton.addActionListener(this);
+        openButton.addActionListener(this);
         newButton.addActionListener(this);
         editButton.addActionListener(this);
         analyzeButton.addActionListener(this);
@@ -47,14 +46,14 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 //        TODO: TRY AND GET THE SWITCH WORKING.It would look nicer =)
 //        switch (e.getSource()) {
-//            case browseButton:
-//                System.out.println("Browse Pressed");
+//            case openButton:
+//                System.out.println("Open Pressed");
 //                break;
 //            case analyzeButton:
 //                System.out.println("Analyze Pressed");
 //        }
-        if (e.getSource() == browseButton) {
-           File[] files = browseButtonHandler();
+        if (e.getSource() == openButton) {
+           File[] files = openButtonHandler();
         } else if (e.getSource() == analyzeButton) {
             analyzeButtonHandler();
         } else if (e.getSource() == newButton) {
@@ -63,7 +62,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
     }
 
     private void analyzeButtonHandler() {
-        File[] filename = browseButtonHandler();
+        File[] filename = openButtonHandler();
         Analysis text = new Analysis(filename[0]);
         // TODO: Instead of Printing to the console we should display in a EditorPane.
         System.out.println("Number of Words: " + text.NumWords());
@@ -83,14 +82,14 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
         }
     }
 
-    public File[] browseButtonHandler() {
+    public File[] openButtonHandler() {
         JFileChooser chooser = new JFileChooser();
         File wd = new File(System.getProperty("user.dir"));
         chooser.setCurrentDirectory(wd);
         chooser.setMultiSelectionEnabled(true);
 
         // Show the dialog; wait until dialog is closed
-        int returnVal = chooser.showOpenDialog(browseButton);
+        int returnVal = chooser.showOpenDialog(openButton);
         File[] files = {};
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             // Retrieve the selected files.
