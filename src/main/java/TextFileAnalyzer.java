@@ -53,20 +53,29 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
 //                System.out.println("Analyze Pressed");
 //        }
         if (e.getSource() == browseButton) {
-            // Open the pop up window for the file browser.
-            JFileChooser chooser = new JFileChooser();
-            File workingDirectory = new File(System.getProperty("user.dir"));
-            chooser.setCurrentDirectory(workingDirectory);
-            int returnVal = chooser.showOpenDialog(browseButton);
-            if(returnVal == JFileChooser.APPROVE_OPTION) {
-                filename = chooser.getSelectedFile().getName();
-                System.out.println("You chose to open this file: " + filename);
-            }
+           browseButtonHandler();
         } else if (e.getSource() == analyzeButton) {
             // Nicholas Part
             //
             System.out.println("ANALYZE PRESSED");
         }
+    }
+
+    public File[] browseButtonHandler() {
+        JFileChooser chooser = new JFileChooser();
+        File wd = new File(System.getProperty("user.dir"));
+        chooser.setCurrentDirectory(wd);
+        chooser.setMultiSelectionEnabled(true);
+
+        // Show the dialog; wait until dialog is closed
+        int returnVal = chooser.showOpenDialog(browseButton);
+        File[] files = {};
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            // Retrieve the selected files.
+            files = chooser.getSelectedFiles();
+            System.out.println("You chose to open: " + files[0] + files[1]);
+        }
+        return files;
     }
 
     private void onOK() {
