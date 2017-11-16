@@ -3,6 +3,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.*;
 import java.io.File;
+import java.io.IOException;
 
 public class TextFileAnalyzer extends JDialog implements ActionListener {
     private JPanel contentPane;
@@ -44,7 +45,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-//        TODO: TRY AND GET THE SWITCH WORKING.
+//        TODO: TRY AND GET THE SWITCH WORKING.It would look nicer =)
 //        switch (e.getSource()) {
 //            case browseButton:
 //                System.out.println("Browse Pressed");
@@ -53,11 +54,27 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
 //                System.out.println("Analyze Pressed");
 //        }
         if (e.getSource() == browseButton) {
-           browseButtonHandler();
+           File[] files = browseButtonHandler();
         } else if (e.getSource() == analyzeButton) {
-            // Nicholas Part
-            //
-            System.out.println("ANALYZE PRESSED");
+            analyzeButtonHandler();
+        } else if (e.getSource() == newButton) {
+            newButtonHandler();
+        }
+    }
+
+    private void analyzeButtonHandler() {
+        File[] filename = browseButtonHandler();
+        Analysis text = new Analysis(filename[0]);
+    }
+
+    private void newButtonHandler() {
+        String path = JOptionPane.showInputDialog("Filename: ");
+        try {
+            File newFile = new File("files/"+path);
+            newFile.createNewFile();
+            System.out.println("Created File at: " + newFile.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -73,7 +90,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             // Retrieve the selected files.
             files = chooser.getSelectedFiles();
-            System.out.println("You chose to open: " + files[0] + files[1]);
+            editorPane1.setText(files[0].toString());
         }
         return files;
     }
