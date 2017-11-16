@@ -65,6 +65,11 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
     private void analyzeButtonHandler() {
         File[] filename = browseButtonHandler();
         Analysis text = new Analysis(filename[0]);
+        // TODO: Instead of Printing to the console we should display in a EditorPane.
+        System.out.println("Number of Words: " + text.NumWords());
+        System.out.println("Number of Spaces: " + text.NumSpaces());
+        System.out.println("Most Common Word: " + text.MostCommonWords());
+        System.out.println("Average Character per line: " + text.AvgCharPerLine());
     }
 
     private void newButtonHandler() {
