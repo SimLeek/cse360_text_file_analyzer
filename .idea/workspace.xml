@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14f53ed0-ebde-40f1-81c4-4b7cd4c8b131" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/TextFileAnalyzer.form" afterPath="$PROJECT_DIR$/src/main/java/TextFileAnalyzer.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/TextFileAnalyzer.java" afterPath="$PROJECT_DIR$/src/main/java/TextFileAnalyzer.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -38,8 +37,8 @@
       <file leaf-file-name="TextFileAnalyzer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/TextFileAnalyzer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="22" column="43" lean-forward="true" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+            <state relative-caret-position="234">
+              <caret line="34" column="8" lean-forward="false" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -96,8 +95,8 @@
         <option value="$PROJECT_DIR$/src/main/java/app.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/files/test.txt" />
-        <option value="$PROJECT_DIR$/src/main/java/TextFileAnalyzer.java" />
         <option value="$PROJECT_DIR$/src/main/java/TextFileAnalyzer.form" />
+        <option value="$PROJECT_DIR$/src/main/java/TextFileAnalyzer.java" />
       </list>
     </option>
   </component>
@@ -421,7 +420,16 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/TextFileAnalyzer.java</url>
+          <line>43</line>
+          <properties />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -586,8 +594,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/TextFileAnalyzer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="22" column="43" lean-forward="true" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+        <state relative-caret-position="234">
+          <caret line="34" column="8" lean-forward="false" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
           <folding />
         </state>
       </provider>

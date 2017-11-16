@@ -27,6 +27,12 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
         setContentPane(contentPane);
         setModal(true);
 
+        openButton.createToolTip();
+        openButton.setToolTipText("Click to Open a File.");
+
+        newButton.createToolTip();
+        newButton.setToolTipText("Click to Create a New File.");
+        
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -58,6 +64,15 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
             analyzeButtonHandler();
         } else if (e.getSource() == newButton) {
             newButtonHandler();
+        } else if (e.getSource() == helpButton) {
+            helpButtonHandler();
+        }
+    }
+
+    private void helpButtonHandler() {
+        File msg = new File("help.txt");
+        if (msg.exists()) {
+            JOptionPane.showInputDialog(msg.getPath());
         }
     }
 
