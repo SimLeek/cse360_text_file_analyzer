@@ -1,12 +1,13 @@
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Vector;
 
-public class TextFileAnalyzer extends JDialog implements ActionListener {
+public class TextFileAnalyzer extends JDialog implements ActionListener, ListSelectionListener {
     private JPanel contentPane;
     private JButton newButton;
     private JButton openButton;
@@ -54,6 +55,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
         analyzeButton.addActionListener(this);
         helpButton.addActionListener(this);
         averageButton.addActionListener(this);
+        fileList.addListSelectionListener(this);
         setContentPane(contentPane);
         setModal(true);
         fileList.removeAll();
@@ -157,5 +159,18 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
     }
 
 
-
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        File f = new File("files/"+fileListModel.elementAt(e.getFirstIndex()).toString());
+        try {
+            FileReader fis = new FileReader(f);
+            char[] data = new char[(int) f.length()];
+            fis.read(data);
+            fis.close();
+            String d = new String(data);
+            editorPane1.setText(d);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
 }
