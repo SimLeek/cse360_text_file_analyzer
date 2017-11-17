@@ -2,10 +2,7 @@
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.*;
 import java.awt.event.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.*;
 import java.util.Vector;
 
@@ -128,20 +125,35 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
     }
 
     private void helpButtonHandler() {
-        File msg = new File("help.txt");
-        if (msg.exists()) {
-            JOptionPane.showInputDialog(msg.getPath());
+        BufferedReader msg = null;
+        try {
+            File file = new File("help.txt");
+            msg = new BufferedReader(new FileReader(file));
+            String st;
+            String sb = "";
+            while ((st = msg.readLine()) != null) {
+                sb += st +"\n";
+                System.out.println(st);
+            }
+            JOptionPane.showMessageDialog(null, sb);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
     }
 
     private void analyzeButtonHandler() {
         File[] filename = openButtonHandler();
-        Analysis text = new Analysis(filename[0]);
+        Analysis text = new Analysis(filename[0]); // Can Create multiple text Analysis by indexing through array
         // TODO: Instead of Printing to the console we should display in a EditorPane.
         System.out.println("Number of Words: " + text.NumWords());
         System.out.println("Number of Spaces: " + text.NumSpaces());
         System.out.println("Most Common Word: " + text.MostCommonWords());
         System.out.println("Average Character per line: " + text.AvgCharPerLine());
+        System.out.println("Number of Lines: " + text.NumLines());
     }
 
     private void newButtonHandler() {
