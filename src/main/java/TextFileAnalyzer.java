@@ -4,6 +4,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.*;
 import java.util.Vector;
 
@@ -19,6 +21,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
     private JList fileList;
     private String filename;
     private DefaultListModel fileListModel;
+    private File currentFile;
 
     private Vector<File> getAllFilesInFolder(String folder_str){
         //from: https://stackoverflow.com/a/5694398/782170
@@ -85,6 +88,26 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
+
+        editorPane1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                super.keyTyped(e);
+                try {
+                    writeToCurrentFile(editorPane1.getText());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+    private void writeToCurrentFile(String newText) throws IOException {
+        FileWriter fw = new FileWriter(currentFile);
+        fw.write(newText);
+        fw.flush();
+        fw.close();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -158,13 +181,16 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
         dispose();
     }
 
+    private void setCurrentFile(String filename){
+        currentFile = new File("files/"+filename);
+    }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        File f = new File("files/"+fileListModel.elementAt(e.getFirstIndex()).toString());
+        setCurrentFile(fileListModel.elementAt(e.getFirstIndex()).toString());
         try {
-            FileReader fis = new FileReader(f);
-            char[] data = new char[(int) f.length()];
+            FileReader fis = new FileReader(currentFile);
+            char[] data = new char[(int) currentFile.length()];
             fis.read(data);
             fis.close();
             String d = new String(data);
