@@ -1,8 +1,10 @@
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
 
 public class TextFileAnalyzer extends JDialog implements ActionListener {
     private JPanel contentPane;
@@ -13,9 +15,31 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
     private JButton helpButton;
     private JButton averageButton;
     private JEditorPane editorPane1;
+    private JList fileList;
     private String filename;
+    private DefaultListModel fileListModel;
 
+    private Vector<File> getAllFilesInFolder(String folder_str){
+        File folder = new File(folder_str);
+        File[] listOfFiles = folder.listFiles();
+        Vector<File> file_vector = new Vector<File>();
 
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                file_vector.add(file);
+            } else if (file.isDirectory()) {
+                //System.out.println("Directory " + file.getName());
+            }
+        }
+        return file_vector;
+    }
+
+    private void addFilesToListModel(DefaultListModel model, Vector<File> file_list){//this 'model' is an object reference passed by value
+        for (File file: file_list){
+            model.addElement(file.getName());
+        }
+
+    }
 
     TextFileAnalyzer() {
         openButton.addActionListener(this);
@@ -26,6 +50,12 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
         averageButton.addActionListener(this);
         setContentPane(contentPane);
         setModal(true);
+        fileList.removeAll();
+
+        fileListModel = new DefaultListModel();
+        fileList.setModel(fileListModel);
+        addFilesToListModel(fileListModel, getAllFilesInFolder("files/"));
+        //fileListModel.addElement("test");
 
         openButton.createToolTip();
         openButton.setToolTipText("Click to Open a File.");
@@ -112,11 +142,6 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
             editorPane1.setText(files[0].toString());
         }
         return files;
-    }
-
-    private void onOK() {
-        // add your code here
-        dispose();
     }
 
     private void onCancel() {
