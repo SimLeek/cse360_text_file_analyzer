@@ -13,7 +13,6 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
     private JPanel contentPane;
     private JButton newButton;
     private JButton openButton;
-    private JButton editButton;
     private JButton analyzeButton;
     private JButton helpButton;
     private JButton averageButton;
@@ -54,7 +53,6 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
     TextFileAnalyzer() {
         openButton.addActionListener(this);
         newButton.addActionListener(this);
-        editButton.addActionListener(this);
         analyzeButton.addActionListener(this);
         helpButton.addActionListener(this);
         averageButton.addActionListener(this);
@@ -100,7 +98,6 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
                 }
             }
         });
-
     }
 
     private void writeToCurrentFile(String newText) throws IOException {
