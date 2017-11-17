@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static java.lang.Math.floor;
 
@@ -100,7 +101,19 @@ public class Analysis {
     }
 
     public String MostCommonWords() {
+        int max = 0;
+        int temp = 0;
         mostCommonWord = contentList.get(0);
+        for (int i = 0; i < contentList.size(); i++){
+            for (int j = i + 1; j < contentList.size(); j++){
+                if (contentList.get(i).equals(contentList.get(j))) temp++;
+            }
+            if (temp > max){
+                mostCommonWord = contentList.get(i);
+                max = temp;
+            }
+            temp = 0;
+        }
         return mostCommonWord;
     }
 
