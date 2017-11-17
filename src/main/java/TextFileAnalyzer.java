@@ -20,6 +20,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
     private DefaultListModel fileListModel;
 
     private Vector<File> getAllFilesInFolder(String folder_str){
+        //from: https://stackoverflow.com/a/5694398/782170
         File folder = new File(folder_str);
         File[] listOfFiles = folder.listFiles();
         Vector<File> file_vector = new Vector<File>();
@@ -41,6 +42,11 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
 
     }
 
+    private void updateFileList(String folder_name){
+        fileListModel.removeAllElements();
+        addFilesToListModel(fileListModel, getAllFilesInFolder(folder_name));
+    }
+
     TextFileAnalyzer() {
         openButton.addActionListener(this);
         newButton.addActionListener(this);
@@ -54,7 +60,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
 
         fileListModel = new DefaultListModel();
         fileList.setModel(fileListModel);
-        addFilesToListModel(fileListModel, getAllFilesInFolder("files/"));
+        updateFileList("files/");
         //fileListModel.addElement("test");
 
         openButton.createToolTip();
@@ -121,6 +127,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener {
         try {
             File newFile = new File("files/"+path);
             newFile.createNewFile();
+            updateFileList("files/");
             System.out.println("Created File at: " + newFile.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
