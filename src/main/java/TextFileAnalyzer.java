@@ -212,7 +212,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
                 String first_str = fileListModel.elementAt(e.getFirstIndex()).toString();
                 String last_str = fileListModel.elementAt(e.getLastIndex()).toString();
 
-                if (!current_str.equals("files\\" + first_str)){
+                if (!current_str.equals("files"+ File.separator + first_str)){
                     next_str = first_str;
                 }else{
                     next_str = last_str;
