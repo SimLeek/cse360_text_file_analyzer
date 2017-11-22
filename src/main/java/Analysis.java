@@ -106,7 +106,7 @@ public class Analysis {
             entireFile += " ";
         }
 
-        String[] words = entireFile.split(" ");
+        String[] words = entireFile.split("[\\n\\r\\s]+");
         for (int i = 0; i < words.length; i++){
             words[i] = words[i].toLowerCase();
         }
