@@ -3,6 +3,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 public class TextFileAnalyzer extends JDialog implements ActionListener, ListSelectionListener {
@@ -225,6 +226,10 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
             try {
                 FileReader fis = new FileReader(currentFile);
                 char[] data = new char[(int) currentFile.length()];
+
+                SimpleDateFormat form = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+                this.setTitle(currentFile.toString() + " : " +form.format(currentFile.lastModified()));
                 fis.read(data);
                 fis.close();
                 String d = new String(data);
