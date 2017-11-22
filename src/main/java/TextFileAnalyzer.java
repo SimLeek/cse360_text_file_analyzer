@@ -149,11 +149,13 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
         File[] filename = openButtonHandler();
         Analysis text = new Analysis(filename[0]); // Can Create multiple text Analysis by indexing through array
         // TODO: Instead of Printing to the console we should display in a EditorPane.
-        System.out.println("Number of Words: " + text.NumWords());
-        System.out.println("Number of Spaces: " + text.NumSpaces());
-        System.out.println("Most Common Word: " + text.MostCommonWords());
-        System.out.println("Average Character per line: " + text.AvgCharPerLine());
-        System.out.println("Number of Lines: " + text.NumLines());
+        System.out.println("Number of lines: " + text.NumLines());
+        System.out.println("Number of blank lines: " + text.NumBlankLines());
+        System.out.println("Number of spaces: " + text.NumSpaces());
+        System.out.println("Number of words: " + text.NumWords());
+        System.out.println("Average characters per line: " + text.AvgCharPerLine());
+        System.out.println("Average word length: " + text.AvgWordLength());
+        System.out.println("Most common words: " + text.MostCommonWords());
     }
 
     private void newButtonHandler() {
