@@ -107,6 +107,10 @@ public class Analysis {
         }
 
         String[] words = entireFile.split(" ");
+        for (int i = 0; i < words.length; i++){
+            words[i] = words[i].toLowerCase();
+        }
+
 
         int max = 0;
 
