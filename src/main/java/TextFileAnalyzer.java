@@ -98,10 +98,12 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
     }
 
     private void writeToCurrentFile(String newText) throws IOException {
-        FileWriter fw = new FileWriter(currentFile);
-        fw.write(newText);
-        fw.flush();
-        fw.close();
+        if (currentFile!=null){
+            FileWriter fw = new FileWriter(currentFile);
+            fw.write(newText);
+            fw.flush();
+            fw.close();
+        }
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -198,16 +200,40 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        setCurrentFile(fileListModel.elementAt(e.getFirstIndex()).toString());
+        if(!e.getValueIsAdjusting()){
         try {
-            FileReader fis = new FileReader(currentFile);
-            char[] data = new char[(int) currentFile.length()];
-            fis.read(data);
-            fis.close();
-            String d = new String(data);
-            editorPane1.setText(d);
+            writeToCurrentFile(editorPane1.getText());
         } catch (IOException e1) {
-            e1.printStackTrace();
+            //e1.printStackTrace();
+        }finally {
+            String next_str = "";
+            if (currentFile!=null){
+                String current_str = currentFile.toString();
+                String first_str = fileListModel.elementAt(e.getFirstIndex()).toString();
+                String last_str = fileListModel.elementAt(e.getLastIndex()).toString();
+
+                if (!current_str.equals("files\\" + first_str)){
+                    next_str = first_str;
+                }else{
+                    next_str = last_str;
+                }
+            }else{
+                next_str = fileListModel.elementAt(e.getFirstIndex()).toString();
+            }
+
+            setCurrentFile(next_str);
+            try {
+                FileReader fis = new FileReader(currentFile);
+                char[] data = new char[(int) currentFile.length()];
+                fis.read(data);
+                fis.close();
+                String d = new String(data);
+                editorPane1.setText(d);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
+
     }
+}
 }
