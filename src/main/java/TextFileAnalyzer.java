@@ -1,4 +1,6 @@
 
+import com.sun.codemodel.internal.JOp;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -151,13 +153,14 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
         File[] filename = openButtonHandler();
         Analysis text = new Analysis(filename[0]); // Can Create multiple text Analysis by indexing through array
         // TODO: Instead of Printing to the console we should display in a EditorPane.
-        System.out.println("Number of lines: " + text.NumLines());
-        System.out.println("Number of blank lines: " + text.NumBlankLines());
-        System.out.println("Number of spaces: " + text.NumSpaces());
-        System.out.println("Number of words: " + text.NumWords());
-        System.out.println("Average characters per line: " + text.AvgCharPerLine());
-        System.out.println("Average word length: " + text.AvgWordLength());
-        System.out.println("Most common words: " + text.MostCommonWords());
+        String output = "Number of lines: " + text.NumLines() + "\n" +
+                "Number of blank lines: " + text.NumBlankLines() + "\n" +
+                "Number of spaces: " + text.NumSpaces() + "\n" +
+                "Number of words: " + text.NumWords() + "\n" +
+                "Average characters per line: " + text.AvgCharPerLine() + "\n" +
+                "Average word length: " + text.AvgWordLength() + "\n" +
+                "Most common words: " + text.MostCommonWords() + "\n";
+        JOptionPane.showMessageDialog(null, output);
     }
 
     private void newButtonHandler() {
