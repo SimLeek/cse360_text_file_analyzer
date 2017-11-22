@@ -1,6 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static java.lang.Math.floor;
 
@@ -100,16 +99,40 @@ public class Analysis {
     }
 
     public String MostCommonWords() {
-        mostCommonWord = contentList.get(0);
-        int longestWordLength = 0;
-        for (int i = 0; i < contentList.size() - 1; i++){
-            if(contentList.get(i).length() > contentList.get(i+1).length()){
-                longestWordLength = contentList.get(i).length();
-            }
-            else {
-                longestWordLength = contentList.get(i+1).length();
+        String entireFile = "";
+
+        for (int i = 0; i < contentList.size(); i++){
+            entireFile += contentList.get(i);
+            entireFile += " ";
+        }
+
+        String[] words = entireFile.split(" ");
+
+        int max = 0;
+
+        Map<String, Integer> frequencies = new LinkedHashMap<String, Integer>();
+        for (String word : words){
+            if (!word.isEmpty()){
+                Integer frequency = frequencies.get(word);
+
+                if (frequency == null){
+                    frequency = 0;
+                }
+
+                ++frequency;
+                if (frequency > max){
+                    max = frequency;
+                    mostCommonWord = word;
+                }
+                else if (frequency == max){
+                    mostCommonWord += " " + word;
+                }
+                frequencies.put(word, frequency);
             }
         }
+
+
+
         return mostCommonWord;
     }
 
