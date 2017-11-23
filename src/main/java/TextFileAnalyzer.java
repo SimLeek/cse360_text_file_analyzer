@@ -15,7 +15,6 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
     private JButton averageButton;
     private JEditorPane editorPane1;
     private JList fileList;
-    private String filename;
     private DefaultListModel fileListModel;
     private File currentFile;
     private boolean moddedFile;
@@ -160,7 +159,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
                 "Number of words: " + text.NumWords() + "\n" +
                 "Average characters per line: " + text.AvgCharPerLine() + "\n" +
                 "Average word length: " + text.AvgWordLength() + "\n" +
-                "Most common words: " + text.MostCommonWords() + "\n";
+                "Most common word(s): " + text.MostCommonWords() + "\n";
         JOptionPane.showMessageDialog(null, output);
     }
 

@@ -10,7 +10,7 @@ public class Analysis {
     private int numOfSpaces = 0; //c
     private int numOfWords = 0; //d
     private int numTotalChar = 0; //e1, f1
-    List<String> contentList;
+    private List<String> contentList;
     private String mostCommonWord = ""; //g
 
     Analysis(File fileName){

@@ -15,9 +15,7 @@ The Analyze button displays various statistics for a selected file in the follow
 	# of words
 	Average chars per line
 	Average word length
-	Most common words
-
-The Help button opens this page!
+	Most common word(s)
 
 The Average button takes all files into account and calculates the same statistics as the Analyze button in the following order:
 	# of lines
@@ -26,4 +24,6 @@ The Average button takes all files into account and calculates the same statisti
 	# of words
 	Average chars per line
 	Average word length
-	Most common words
+	Most common word(s)
+
+The Help button opens this page!
