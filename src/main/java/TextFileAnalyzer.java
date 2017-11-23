@@ -18,6 +18,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
     private String filename;
     private DefaultListModel fileListModel;
     private File currentFile;
+    private boolean moddedFile;
 
     private Vector<File> getAllFilesInFolder(String folder_str){
         //from: https://stackoverflow.com/a/5694398/782170
@@ -48,6 +49,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
     }
 
     TextFileAnalyzer() {
+        moddedFile = false;
         openButton.addActionListener(this);
         newButton.addActionListener(this);
         analyzeButton.addActionListener(this);
@@ -89,6 +91,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
             public void keyTyped(KeyEvent e) {
                 super.keyTyped(e);
                 try {
+                    moddedFile = true;
                     writeToCurrentFile(editorPane1.getText());
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -203,7 +206,9 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
     public void valueChanged(ListSelectionEvent e) {
         if(!e.getValueIsAdjusting()){
         try {
-            writeToCurrentFile(editorPane1.getText());
+            if(moddedFile){
+                writeToCurrentFile(editorPane1.getText());
+            }
         } catch (IOException e1) {
             //e1.printStackTrace();
         }finally {
@@ -234,6 +239,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
                 fis.close();
                 String d = new String(data);
                 editorPane1.setText(d);
+                moddedFile = false;
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
