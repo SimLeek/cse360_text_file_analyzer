@@ -1,67 +1,59 @@
 import java.io.*;
+import java.nio.Buffer;
 import java.util.*;
 
 import static java.lang.Math.floor;
 
 public class Analysis {
 
-    private int numOfLines = 0; //a
-    private int numOfBlankLines = 0; //b
-    private int numOfSpaces = 0; //c
-    private int numOfWords = 0; //d
-    private int numTotalChar = 0; //e1, f1
+    private int numOfLines; //a
+    private int numOfBlankLines; //b
+    private int numOfSpaces; //c
+    private int numOfWords; //d
+    private int numTotalChar; //e1, f1
     private List<String> contentList;
-    private String mostCommonWord = ""; //g
+    private String mostCommonWord; //g
+    private File file;
 
-    Analysis(File fileName){
-        //myFile = new File(fileName);
-        //System.out.println("File name to be analyzed: " + myFile.toString()); //testing for correct filename
+    Analysis(String filename){
+        // Initializing all the instance variables to empty.
+        this.file = new File(filename);
+        this.numOfLines = 0;
+        this.numOfBlankLines = 0;
+        this.numOfSpaces = 0;
+        this.numOfWords = 0;
+        this.numTotalChar = 0;
+        mostCommonWord = "";
 
+        readFile();
+    }
+    
+    // Reading all the file line by line to extract file statistics.
+    public void readFile() {
+        String line;
+        this.contentList = new ArrayList<String>();
         try {
-            FileReader reader = new FileReader(fileName);
-            BufferedReader buff = new BufferedReader(reader);
-
-            String line;
-            contentList = new ArrayList<String>();
-
-            while ((line = buff.readLine()) != null) {
-
-                contentList.add(line);
-
-                //Computing required file reports:
-
-                //a. # Lines:
-                numOfLines++;
-
-                //b. # Blank Lines:
-                if (line.length() == 0){
-                    numOfBlankLines++;
+            BufferedReader buffer = new BufferedReader(new FileReader(this.file));
+            while ((line = buffer.readLine()) != null) {
+                this.contentList.add(line); // Adding the current line into our content list.
+                this.numOfLines++; // Incrementing the count of lines in the files.
+                if (line.length() == 0) { // Found a blank line.
+                    this.numOfBlankLines++;
                 }
-
-                //c. # Spaces:
+                // Reading number of space within each individual line.
                 for (int i = 0; i < line.length(); i++){
                     char currChar = line.charAt(i);
                     if (currChar == ' '){
-                        numOfSpaces++;
+                        this.numOfSpaces++;
                     }
-
-                    numTotalChar++;
+                    this.numTotalChar++;
                 }
-
-                //d. # Words:
                 String trim = line.trim();
                 numOfWords += trim.isEmpty() ? 0 : trim.split("\\s+").length;
-
             }
-
-            buff.close();
-        }
-        catch (FileNotFoundException e){
-            System.out.println("Unable to open " + fileName + "\n" + e.getMessage());
-        }
-        catch (IOException e){
-            System.out.println("Error reading " + fileName);
-            e.printStackTrace();
+            buffer.close();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
