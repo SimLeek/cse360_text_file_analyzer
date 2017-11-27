@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="14f53ed0-ebde-40f1-81c4-4b7cd4c8b131" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/Hello.txt" afterPath="$PROJECT_DIR$/files/Hello.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/test.txt" afterPath="$PROJECT_DIR$/files/test.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Analysis.java" afterPath="$PROJECT_DIR$/src/main/java/Analysis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/TextFileAnalyzer.java" afterPath="$PROJECT_DIR$/src/main/java/TextFileAnalyzer.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,7 +27,7 @@
       <file leaf-file-name="TextFileAnalyzer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/TextFileAnalyzer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
+            <state relative-caret-position="-77">
               <caret line="174" column="35" lean-forward="false" selection-start-line="174" selection-start-column="35" selection-end-line="174" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -1407,7 +1403,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/TextFileAnalyzer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
+        <state relative-caret-position="-77">
           <caret line="174" column="35" lean-forward="false" selection-start-line="174" selection-start-column="35" selection-end-line="174" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
