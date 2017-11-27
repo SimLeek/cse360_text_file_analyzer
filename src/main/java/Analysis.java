@@ -27,7 +27,7 @@ public class Analysis {
 
         readFile();
     }
-    
+
     // Reading all the file line by line to extract file statistics.
     public void readFile() {
         String line;
@@ -71,6 +71,10 @@ public class Analysis {
 
     public int NumWords() {
         return numOfWords;
+    }
+
+    public int getTotalChars() {
+        return this.numTotalChar;
     }
 
     public int AvgCharPerLine(){

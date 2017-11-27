@@ -6,6 +6,8 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
+import static java.lang.Math.floor;
+
 public class TextFileAnalyzer extends JDialog implements ActionListener, ListSelectionListener {
     private JPanel contentPane;
     private JButton newButton;
@@ -150,17 +152,56 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
     }
 
     private void analyzeButtonHandler() {
-        File[] filename = openButtonHandler();
-        Analysis text = new Analysis(filename[0]); // Can Create multiple text Analysis by indexing through array
-        // TODO: Instead of Printing to the console we should display in a EditorPane.
-        String output = "Number of lines: " + text.NumLines() + "\n" +
-                "Number of blank lines: " + text.NumBlankLines() + "\n" +
-                "Number of spaces: " + text.NumSpaces() + "\n" +
-                "Number of words: " + text.NumWords() + "\n" +
-                "Average characters per line: " + text.AvgCharPerLine() + "\n" +
-                "Average word length: " + text.AvgWordLength() + "\n" +
-                "Most common word(s): " + text.MostCommonWords() + "\n";
+        File[] files = openButtonHandler();
+        String output;
+        if (files.length == 0) {
+            Analysis text = new Analysis(files[0].getAbsolutePath()); // Can Create multiple text Analysis by indexing through array
+            // TODO: Instead of Printing to the console we should display in a EditorPane.
+            output = "Number of lines: " + text.NumLines() + "\n" +
+                    "Number of blank lines: " + text.NumBlankLines() + "\n" +
+                    "Number of spaces: " + text.NumSpaces() + "\n" +
+                    "Number of words: " + text.NumWords() + "\n" +
+                    "Average characters per line: " + text.AvgCharPerLine() + "\n" +
+                    "Average word length: " + text.AvgWordLength() + "\n" +
+                    "Most common word(s): " + text.MostCommonWords() + "\n";
+
+        } else {
+            int lines = 0,
+                    blanks = 0,
+                    spaces = 0,
+                    words = 0,
+                    averageWordLength = 0,
+                    averageCharsPerLine = 0,
+                    totalChars = 0;
+            String mostCommonWords = "";
+            for (int i = 0; i < files.length; i++) {
+                Analysis text = new Analysis(files[i].getAbsolutePath());
+                lines += text.NumLines();
+                blanks += text.NumBlankLines();
+                spaces += text.NumSpaces();
+                words += text.NumWords();
+                totalChars += text.getTotalChars();
+                averageWordLength += text.AvgWordLength();
+                mostCommonWords += text.MostCommonWords() + " ";
+            }
+            if (lines != 0) {
+                averageCharsPerLine = (int) floor(totalChars / lines);
+            }
+            output = "Number of lines: " + lines + "\n" +
+                    "Number of blank lines: " + blanks + "\n" +
+                    "Number of spaces: " + spaces + "\n" +
+                    "Number of words: " + words + "\n" +
+                    "Average characters per line: " + averageCharsPerLine + "\n" +
+                    "Average word length: " + averageWordLength + "\n" +
+                    "Most common word(s): " + mostCommonWords + "\n";
+
+        }
+
         JOptionPane.showMessageDialog(null, output);
+    }
+
+    public void getAverage(int[] stats) {
+
     }
 
     private void newButtonHandler() {
