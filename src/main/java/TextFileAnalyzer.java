@@ -3,6 +3,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
 import java.io.*;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
@@ -120,9 +121,17 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
 //                System.out.println("Analyze Pressed");
 //        }
         if (e.getSource() == openButton) {
-           File[] files = openButtonHandler();
+            try {
+                File[] files = openButtonHandler();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         } else if (e.getSource() == analyzeButton) {
-            analyzeButtonHandler();
+            try {
+                analyzeButtonHandler();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         } else if (e.getSource() == newButton) {
             newButtonHandler();
         } else if (e.getSource() == helpButton) {
@@ -151,7 +160,7 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
 
     }
 
-    private void analyzeButtonHandler() {
+    private void analyzeButtonHandler() throws IOException {
         File[] files = openButtonHandler();
         String output;
         if (files.length == 0) {
@@ -216,7 +225,25 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
         }
     }
 
-    public File[] openButtonHandler() {
+    private static void copyFileUsingStream(File source, File dest) throws IOException {
+        //https://www.journaldev.com/861/java-copy-file
+        InputStream is = null;
+        OutputStream os = null;
+        try {
+            is = new FileInputStream(source);
+            os = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+        } finally {
+            is.close();
+            os.close();
+        }
+    }
+
+    public File[] openButtonHandler() throws IOException {
         JFileChooser chooser = new JFileChooser();
         File wd = new File(System.getProperty("user.dir"));
         chooser.setCurrentDirectory(wd);
@@ -227,8 +254,20 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
         File[] files = {};
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             // Retrieve the selected files.
+            editorPane1.setText("");
             files = chooser.getSelectedFiles();
-            editorPane1.setText(files[0].toString());
+            for (File file : files) {
+                File newFile = new File("files/" + file.getName());
+                boolean del = newFile.delete();
+
+                boolean success = newFile.createNewFile();
+                if(success){
+                    copyFileUsingStream(file, newFile);
+                    editorPane1.setText(editorPane1.getText() + "\n" + file.toString());
+                }
+
+            }
+            updateFileList("files/");
         }
         return files;
     }
