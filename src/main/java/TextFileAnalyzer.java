@@ -227,20 +227,18 @@ public class TextFileAnalyzer extends JDialog implements ActionListener, ListSel
 
     private static void copyFileUsingStream(File source, File dest) throws IOException {
         //https://www.journaldev.com/861/java-copy-file
-        InputStream is = null;
-        OutputStream os = null;
-        try {
-            is = new FileInputStream(source);
-            os = new FileOutputStream(dest);
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = is.read(buffer)) > 0) {
-                os.write(buffer, 0, length);
-            }
-        } finally {
-            is.close();
-            os.close();
+        InputStream is = new FileInputStream(source);
+        OutputStream os = new FileOutputStream(dest);
+
+        byte[] buffer = new byte[2^10];
+        int length;
+
+        while ((length = is.read(buffer)) > 0) {
+            os.write(buffer, 0, length);
         }
+
+        is.close();
+        os.close();
     }
 
     public File[] openButtonHandler() throws IOException {
